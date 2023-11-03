@@ -14,10 +14,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float jumpSpeed = 3f;
 
+    public float raycastHeightModifier = 0.1f;
+
     private Vector3 move;
     private Vector2 movementInput;
-    private Vector2 jumpInput;
+    private Vector2 mouseInput;
     private bool onGround;
+    private bool attacking;
 
     public LayerMask groundLayer;
 
@@ -45,9 +48,22 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("OnGround", onGround);
 
-        move = new Vector3(movementInput.x, 0, movementInput.y);
-        move = move * moveSpeed + Vector3.up * rb.velocity.y;
+        anim.SetBool("Attacking", attacking);
+
+        print(mouseInput);
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Melee Attack"))
+        {
+            return;
+        }
+        
+        Vector3 forwardDirection = transform.forward;
+        Vector3 adjustedMove = forwardDirection * movementInput.y + transform.right * movementInput.x;
+        move = new Vector3(adjustedMove.x, 0, adjustedMove.z) * moveSpeed + Vector3.up * rb.velocity.y;
+
         rb.velocity = move;
+        rb.angularVelocity = new Vector3(0, mouseInput.x, 0);
+        MainCamera.GetInstance().RotateCamera(mouseInput.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -73,9 +89,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if(context.performed && onGround)
+        {
+            attacking = true;
+        }
+        if(context.canceled)
+        {
+            attacking = false;
+        }
+    }
+
+    public void OnMouseMove(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            mouseInput = context.ReadValue<Vector2>();
+        }
+        if(context.canceled)
+        {
+            mouseInput = context.ReadValue<Vector2>();
+        }
+    }
+
     private void CheckOnGround()
     {
-        Ray ray = new Ray(transform.position, Vector3.down);
+        Ray ray = new Ray(transform.position + Vector3.down * raycastHeightModifier, Vector3.down);
 
         if (Physics.Raycast(ray, out RaycastHit hit, groundLayer))
         {
