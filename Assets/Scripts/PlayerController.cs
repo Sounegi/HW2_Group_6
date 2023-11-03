@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 move;
     private Vector2 movementInput;
     private Vector2 jumpInput;
-    private bool canJump;
+    private bool onGround;
+
+    public LayerMask groundLayer;
 
     void Start()
     {
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        CheckOnGround();
+
         if(movementInput == Vector2.zero)
         {
             anim.SetBool("Move", false);
@@ -38,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat("X", movementInput.x);
         anim.SetFloat("Z", movementInput.y);
+
+        anim.SetBool("OnGround", onGround);
 
         move = new Vector3(movementInput.x, 0, movementInput.y);
         move = move * moveSpeed + Vector3.up * rb.velocity.y;
@@ -61,9 +67,23 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && onGround)
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+        }
+    }
+
+    private void CheckOnGround()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, groundLayer))
+        {
+            onGround = false;
+        }
+        else
+        {
+            onGround = true;
         }
     }
 }
