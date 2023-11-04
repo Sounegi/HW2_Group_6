@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
 
     [Header("Scenes")]
     [SerializeField] private string PlayScene = "Scene_1";
+    [SerializeField] private string ControlScene = "Controls";
 
     void Awake()
     {
@@ -29,7 +30,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        ImageFade.GetInstance().StartFade(Color.clear, 2f, 1f);
+        ImageFade.GetInstance().StartFade(Color.clear, 1f, 1f);
     }
 
     void Update()
@@ -61,6 +62,10 @@ public class MenuManager : MonoBehaviour
             if(arrowPosition == 0)
             {
                 StartCoroutine(ChangeScene(PlayScene));
+            }
+            else if(arrowPosition == 2)
+            {
+                StartCoroutine(ChangeScene(ControlScene));
             }
         }
     }

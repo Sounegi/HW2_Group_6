@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float jumpSpeed = 3f;
 
-    public float raycastHeightModifier = 0.1f;
+    public float raycastHeightModifier = 0.5f;
 
     private Vector3 move;
     private Vector2 movementInput;
