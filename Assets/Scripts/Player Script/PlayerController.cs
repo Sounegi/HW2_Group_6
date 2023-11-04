@@ -34,14 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckOnGround();
 
-        if(movementInput == Vector2.zero)
-        {
-            anim.SetBool("Move", false);
-        }
-        else
-        {
-            anim.SetBool("Move", true);
-        }
+        anim.SetBool("Move", movementInput != Vector2.zero);
 
         anim.SetFloat("X", movementInput.x);
         anim.SetFloat("Z", movementInput.y);
@@ -116,14 +109,6 @@ public class PlayerController : MonoBehaviour
     private void CheckOnGround()
     {
         Ray ray = new Ray(transform.position + Vector3.down * raycastHeightModifier, Vector3.down);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, groundLayer))
-        {
-            onGround = false;
-        }
-        else
-        {
-            onGround = true;
-        }
+        onGround = !Physics.Raycast(ray, out RaycastHit hit, groundLayer);
     }
 }
