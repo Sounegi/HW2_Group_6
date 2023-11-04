@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     public Terrain map;
     public GameObject enemy_template;
+    public GameObject dest_hold;
     public int enemy_count;
     public float roam_distance;
     float map_x_size, map_z_size;
@@ -20,9 +21,10 @@ public class Spawner : MonoBehaviour
         public bool playerFound;
         public Vector3 destination_target;
         float roam_distance, map_x_size, map_z_size;
-        public GameObject temp;
+        public GameObject temp, dest_hold;
+        int val = 0;
 
-        public EnemyInfo(NavMeshAgent a, Vector3 dest, float roam, GameObject template, float x, float z)
+        public EnemyInfo(NavMeshAgent a, Vector3 dest, float roam, GameObject template, float x, float z, GameObject template_target)
         {
             agent = a;
             destination_target = dest;
@@ -31,6 +33,7 @@ public class Spawner : MonoBehaviour
             playerFound = false;
             temp = template;
             agent.SetDestination(agent.transform.position);
+            dest_hold = template_target;
             map_x_size = x;
             map_z_size = z;
         }
@@ -48,17 +51,32 @@ public class Spawner : MonoBehaviour
         }
         public void Patrol(bool first)
         {
-            Vector3 new_dest = agent.transform.position + Random.insideUnitSphere * roam_distance;
-            new_dest = FixBoundary(new_dest);
-            new_dest.y = agent.transform.position.y+5f;
+
             float distance = agent.remainingDistance;
-            Debug.Log("remaining distance is: " + distance);
+            float velocity = agent.velocity.magnitude / agent.speed;
+            Debug.Log("remaining distance is: " + velocity);
             if (distance <= 3f && !isPatrolling || first)
             {
+                Random.InitState((int)System.DateTime.Now.Ticks);
+                Vector3 new_dest = Vector3.zero;
+                Vector3 adj_dist = new Vector3(Random.Range(0.1f, 2f), 0f, Random.Range(0.1f, 2f));
+                if (val%2==0)
+                    new_dest = agent.transform.position - (Random.insideUnitSphere + adj_dist) * roam_distance;
+                else
+                    new_dest = agent.transform.position + (Random.insideUnitSphere + adj_dist) * roam_distance;
+                val++;
+                new_dest = FixBoundary(new_dest);
+                new_dest.y = agent.transform.position.y + 5f;
                 agent.SetDestination(new_dest);
+
+
                 isPatrolling = true; // Set the flag to true so it won't patrol again until reset
-                //GameObject newEnemy = Instantiate(temp, new_dest, Quaternion.identity);
-                //newEnemy.transform.localScale *= 10f;// = new Vector3(10f, 10f, 10f);
+                /*
+                GameObject newEnemy = Instantiate(dest_hold, new_dest, Quaternion.identity);
+                //Rigidbody test = newEnemy.GetComponent<Rigidbody>();
+                newEnemy.transform.localScale *= 10f;// = new Vector3(10f, 10f, 10f);
+                Destroy(newEnemy, 3);
+                */
             }
 
             // Add a reset condition for when you want to patrol again
@@ -105,7 +123,7 @@ public class Spawner : MonoBehaviour
         GameObject musuh = Instantiate(enemy_template, randomSpawnPosition, Quaternion.identity);
         musuh.transform.localScale *= 5f;
         NavMeshAgent agent = musuh.GetComponent<NavMeshAgent>();
-        EnemyInfo newenemy_info = new EnemyInfo(agent, Vector3.zero, roam_distance, enemy_template, max_x, max_z);
+        EnemyInfo newenemy_info = new EnemyInfo(agent, Vector3.zero, roam_distance, enemy_template, max_x, max_z, dest_hold);
 
         enemy.Add(musuh, newenemy_info);
     }

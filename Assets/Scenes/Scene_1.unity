@@ -693,8 +693,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 1622647100}
   enemy_template: {fileID: 5634256067516793851, guid: 69c8ea13fbc195f45b128a6c1bd839c3, type: 3}
-  enemy_count: 1
-  roam_distance: 300
+  dest_hold: {fileID: 5634256067516793851, guid: 75735f71f22a53142a853b26215cacf4, type: 3}
+  enemy_count: 3
+  roam_distance: 272.32
 --- !u!4 &907859921
 Transform:
   m_ObjectHideFlags: 0
