@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("Attacking", attacking);
 
+        print(mouseInput);
+
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Melee Attack"))
         {
             return;

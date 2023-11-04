@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
     private int maxHealth = 3;
-    private int currentHealth;
+    [SerializeField] int currentHealth;
     
     public List<Sprite> heartSprites;
     public List<Image> hearts;
@@ -51,5 +51,12 @@ public class HealthManager : MonoBehaviour
                 hearts[i].sprite = heartSprites[1];
             }
         }
+    }
+    public void AddHealth(int deltaHealth) {
+        currentHealth += deltaHealth;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+        if (currentHealth < 0)
+            currentHealth = 0;
     }
 }
