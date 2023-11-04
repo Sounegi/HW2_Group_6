@@ -12,6 +12,7 @@ public class ControlsManager : MonoBehaviour
 
     void Start()
     {
+        ImageFade.GetInstance().SetColor(Color.black);
         ImageFade.GetInstance().StartFade(Color.clear, 1f, 1f);
     }
 

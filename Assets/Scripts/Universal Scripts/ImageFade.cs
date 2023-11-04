@@ -38,6 +38,11 @@ public class ImageFade : MonoBehaviour
         yield return null;
     }
 
+    public void SetColor(Color to)
+    {
+        image.color = to;
+    }
+
     public void StartFade(Color to, float duration, float delay = 0f, System.Action callback = null)
     {
         StartCoroutine(Fade(to, duration, delay));
