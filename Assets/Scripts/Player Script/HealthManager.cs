@@ -5,41 +5,35 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+    private static HealthManager instance;
+
     private int maxHealth = 3;
-    [SerializeField] int currentHealth;
-    
+    private int currentHealth;
     public List<Sprite> heartSprites;
     public List<Image> hearts;
 
-    public bool toggler1 = true;
-    private bool toggler2 = false;
-    public bool type = true;
+    void Awake()
+    {
+        instance = this;
+    }
+
+    public static HealthManager GetInstance()
+    {
+        return instance;
+    }
 
     void Start()
     {
-        currentHealth = 3;
+        currentHealth = 1;
     }
 
     void Update()
     {
-        if(toggler1 == toggler2)
-        {
-            adjustHealth(type);
-            toggler2 = !toggler2;
-        }
+        adjustHealth();
     }
 
-    public void adjustHealth(bool type)
+    public void adjustHealth()
     {
-        if(type && currentHealth > 0)
-        {
-            currentHealth -= 1;
-        }
-        else if(!type && currentHealth < maxHealth)
-        {
-            currentHealth += 1;
-        }
-
         for (int i = 0; i < hearts.Count; i++)
         {
             if(i < currentHealth)
@@ -52,11 +46,16 @@ public class HealthManager : MonoBehaviour
             }
         }
     }
-    public void AddHealth(int deltaHealth) {
+    public void AddHealth(int deltaHealth)
+    {
         currentHealth += deltaHealth;
         if (currentHealth > maxHealth)
+        {
             currentHealth = maxHealth;
+        }
         if (currentHealth < 0)
+        {
             currentHealth = 0;
+        }
     }
 }
