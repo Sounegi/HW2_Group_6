@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
     private Animator anim;
+    private AudioManager audioManager;
 
     [Header("Speed Values")]
     [SerializeField] private float moveSpeed = 3.5f;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
         if(context.performed && onGround)
         {
             attacking = true;
+            audioManager.PlaySoundEffect(0);
         }
         if(context.canceled)
         {
