@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1515,6 +1515,7 @@ MonoBehaviour:
   leftArrow: {fileID: 1656114132}
   rightArrow: {fileID: 1858009173}
   PlayScene: Scene_1
+  ControlScene: Controls
 --- !u!4 &1667200340
 Transform:
   m_ObjectHideFlags: 0
