@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
         DetectAttack detect;
 
         public EnemyInfo(NavMeshAgent a, Vector3 dest, float roam, float x, float z, GameObject template_target, 
-            GameObject player_info, List<GameObject> points, int type, DetectAttack detection)
+            GameObject player_info, int type, DetectAttack detection)
         {
             agent = a;
             destination_target = dest;
@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
             speed = agent.speed;
             acceleration = agent.acceleration;
             remain_time = patrol_time;
-            patrol_points = points;
+            //patrol_points = points;
             lastchosen = -1;
             detect = detection;
             shoot_interval = -1;
@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour
         }
         public void Patrol(bool first)
         {
-
+            /*
             float distance = agent.remainingDistance;
             //Debug.Log(distance + "chosen spot:" + patrol_points[choose].gameObject.name);
             if (distance <= 0.03f && !isPatrolling)
@@ -89,6 +89,7 @@ public class EnemyController : MonoBehaviour
             {
                 isPatrolling = false;
             }
+            */
         }
 
         public void Chase()
@@ -99,6 +100,7 @@ public class EnemyController : MonoBehaviour
         public void Attack()
         {
             agent.isStopped = true;
+
             print("attack called");
             Debug.Log(agent.transform.position);
             GameObject bullet = Instantiate(bullet_holder, agent.transform.position, Quaternion.identity);
@@ -107,7 +109,7 @@ public class EnemyController : MonoBehaviour
             Vector3 direction = player.transform.position - bullet.transform.position;
             bull_rb.AddForce(direction.normalized * 1000, ForceMode.Force);
             Destroy(bullet, 3);
-
+            shoot_interval = 4;
             //yield return new WaitForSeconds(3);
         }
     }
@@ -117,12 +119,13 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         List<GameObject> enemylist = spawner.enemy;
+        /*
         List<GameObject> patrol_points = new List<GameObject>();
         foreach (Transform point in Patrol.GetComponentsInChildren<Transform>())
         {
             patrol_points.Add(point.gameObject);
         }
-
+        */
         int type;
         foreach (GameObject enemy in enemylist)
         {
@@ -132,12 +135,17 @@ public class EnemyController : MonoBehaviour
             type = Random.Range(1, 3);
             type = 3;
             NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
-            DetectAttack detection = enemy.GetComponent<DetectAttack>();
-            enemydict.Add(enemy, new EnemyInfo(agent, Vector3.zero, roam_distance, 200f, 200f, dest_hold, player, patrol_points, type, detection));
+            DetectAttack detection = enemy.GetComponentInChildren<DetectAttack>();
+            enemydict.Add(enemy, new EnemyInfo(agent, Vector3.zero, roam_distance, 200f, 200f, dest_hold, player, type, detection));
         }
     }
 
     // Update is called once per frame
+
+    private void FixedUpdate()
+    {
+        
+    }
     void Update()
     {
         foreach (KeyValuePair<GameObject, EnemyInfo> singleenemy in enemydict)
@@ -151,7 +159,6 @@ public class EnemyController : MonoBehaviour
                 {
                     singleenemy.Value.Attack();
                     print("attacking!");
-                    singleenemy.Value.shoot_interval = 4;
                 }
             }
             else
