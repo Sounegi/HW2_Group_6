@@ -22,4 +22,8 @@ public class AudioManager : MonoBehaviour
     public void PlaySoundEffect(int index, float volume) {
         audioSource.PlayOneShot(SFXs[index], volume * sfxVolume);
     }
+
+    public void PlaySoundEffect(int index, float volume, AudioSource targetAudioSource) {
+        targetAudioSource.PlayOneShot(SFXs[index], volume * sfxVolume);
+    }
 }
