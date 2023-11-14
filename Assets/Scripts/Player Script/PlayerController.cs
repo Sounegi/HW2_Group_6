@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController instance;
     private Rigidbody rb;
     private Animator anim;
 
@@ -25,6 +26,16 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask groundLayer;
 
+    void Awake()
+    {
+        instance = this;
+    }
+
+    public static PlayerController GetInstance()
+    {
+        return instance;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CheckOnGround();
+        // CheckOnGround();
 
         anim.SetBool("Move", movementInput != Vector2.zero);
 
@@ -80,6 +91,7 @@ public class PlayerController : MonoBehaviour
         if(context.performed && onGround)
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+            onGround = false;
         }
     }
 
@@ -108,9 +120,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CheckOnGround()
+    // private void CheckOnGround()
+    // {
+    //     Ray ray = new Ray(transform.position + Vector3.down * raycastHeightModifier, Vector3.down);
+    //     onGround = Physics.Raycast(ray, out RaycastHit hit, groundLayer);
+    //     Debug.DrawRay(ray.origin, ray.direction * (hit.distance > 0 ? hit.distance : 100f), Color.red);
+    // }
+
+    public void ChangeGroundState(bool val)
     {
-        Ray ray = new Ray(transform.position + Vector3.down * raycastHeightModifier, Vector3.down);
-        onGround = !Physics.Raycast(ray, out RaycastHit hit, groundLayer);
+        onGround = val;
     }
 }
