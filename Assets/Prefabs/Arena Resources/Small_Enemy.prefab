@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2279073615236582754}
   - component: {fileID: 5939641251320222376}
   m_Layer: 0
-  m_Name: EnemyTemplate
+  m_Name: Small_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cdafca57dd6dbfd4a83e300254333c16, type: 2}
+  - {fileID: 2100000, guid: 9c0852e25d2e16448b00d43664c335a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,8 +110,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 1
+  m_Speed: 5
+  m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9c83199191c7249b59c103e0752ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gothit: 0
 --- !u!1 &5818424063717260861
 GameObject:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public class EnemyController : MonoBehaviour
         private int SetHP(int enemy_type)
         {
             if (enemy_type == 1 || enemy_type == 3)
-                return 3;
+                return 1;
             else
                 return 3;
         }
@@ -164,7 +164,7 @@ public class EnemyController : MonoBehaviour
     Dictionary<GameObject, EnemyInfo> enemydict = new Dictionary<GameObject, EnemyInfo>();
     void Start()
     {
-        List<GameObject> enemylist = spawner.enemy;
+        List<KeyValuePair<GameObject, int>> enemylist = spawner.enemy;
         current_scene = SceneManager.GetActiveScene();
         current_scene_string = current_scene.name;
         /*
@@ -175,17 +175,17 @@ public class EnemyController : MonoBehaviour
         }
         */
         int type;
-        foreach (GameObject enemy in enemylist)
+        foreach (KeyValuePair<GameObject, int> enemy in enemylist)
         {
             //1 = small fast
             //2 = big and slow
             //3 = ranged
-            type = Random.Range(1, 3);
-            type = 3;
-            NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
-            DetectAttack detection = enemy.GetComponentInChildren<DetectAttack>();
-            EnemyHealthManager manage = enemy.GetComponent<EnemyHealthManager>();
-            enemydict.Add(enemy, new EnemyInfo(agent, Vector3.zero, roam_distance, 200f, 200f, dest_hold, player, type, detection, manage));
+            NavMeshAgent agent = enemy.Key.GetComponent<NavMeshAgent>();
+            DetectAttack detection = enemy.Key.GetComponentInChildren<DetectAttack>();
+            EnemyHealthManager manage = enemy.Key.GetComponent<EnemyHealthManager>();
+
+            type = enemy.Value;
+            enemydict.Add(enemy.Key, new EnemyInfo(agent, Vector3.zero, roam_distance, 200f, 200f, dest_hold, player, type, detection, manage));
         }
         Destroy(spawner);
     }
@@ -212,9 +212,9 @@ public class EnemyController : MonoBehaviour
                 continue;
             }
             
-            if (shoot_player)
+            if (shoot_player && singleenemy.Value.enemy_type == 3)
             {
-                if (singleenemy.Value.enemy_type == 3 && singleenemy.Value.shoot_interval <= 0)
+                if (singleenemy.Value.shoot_interval <= 0)
                 {
                     singleenemy.Value.Attack();
                     print("attacking!");
