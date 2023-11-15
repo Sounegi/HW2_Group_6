@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Left Click -Attack
+  m_text: Left Click - Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc5a5122363213442b48177e14925d02, type: 2}
   m_sharedMaterial: {fileID: -4356686983118583354, guid: fc5a5122363213442b48177e14925d02, type: 2}

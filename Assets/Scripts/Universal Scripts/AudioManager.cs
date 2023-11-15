@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] List<AudioClip> SFXs;
-
-    public static AudioManager instance;
-    public float sfxVolume = 1.0f;
-
     private AudioSource audioSource;
-    private void Awake() {
-        instance = this;
+
+    public List<AudioClip> clips;
+
+    void Awake()
+    {
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static AudioManager GetInstance() {
-        return instance;
-    }
-
-    public void PlaySoundEffect(int index, float volume) {
-        audioSource.PlayOneShot(SFXs[index], volume * sfxVolume);
+    public void PlayClip(int index, float volume)
+    {
+        audioSource.clip = clips[0];
+        audioSource.volume = Mathf.Clamp01(volume);
+        audioSource.Play();
     }
 }

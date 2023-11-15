@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController instance;
     private Rigidbody rb;
     private Animator anim;
 
@@ -14,16 +15,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float jumpSpeed = 3f;
 
-    public float raycastHeightModifier = 0.5f;
-    private const float SFXVolume = 1.0f;
-
     private Vector3 move;
     private Vector2 movementInput;
     private Vector2 mouseInput;
     private bool onGround;
     private bool attacking;
 
+    public bool isAttacking;
     public LayerMask groundLayer;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
+    public static PlayerController GetInstance()
+    {
+        return instance;
+    }
 
     void Start()
     {
@@ -33,8 +42,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CheckOnGround();
-
         anim.SetBool("Move", movementInput != Vector2.zero);
 
         anim.SetFloat("X", movementInput.x);
@@ -44,11 +51,17 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("Attacking", attacking);
 
-        //print(mouseInput);
-
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Melee Attack"))
         {
+            AxeBehaviour.GetInstance().Attack();
+            rb.velocity = new Vector3 (0, 0, 0);
+            isAttacking = true;
             return;
+        }
+        else
+        {
+            AxeBehaviour.GetInstance().Reset();
+            isAttacking = false;
         }
         
         Vector3 forwardDirection = transform.forward;
@@ -79,16 +92,17 @@ public class PlayerController : MonoBehaviour
     {
         if(context.performed && onGround)
         {
-            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+            StartCoroutine(Jump());
+            // rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+            onGround = false;
         }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if(context.performed && onGround)
+        if(context.performed && onGround && !isAttacking)
         {
             attacking = true;
-            AudioManager.GetInstance().PlaySoundEffect(0, SFXVolume);
         }
         if(context.canceled)
         {
@@ -108,9 +122,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CheckOnGround()
+    public void ChangeGroundState(bool val)
     {
-        Ray ray = new Ray(transform.position + Vector3.down * raycastHeightModifier, Vector3.down);
-        onGround = !Physics.Raycast(ray, out RaycastHit hit, groundLayer);
+        onGround = val;
+    }
+
+    IEnumerator Jump()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
     }
 }
