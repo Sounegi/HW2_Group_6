@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SFXController : MonoBehaviour
+public class PotionSFXController : MonoBehaviour
 {
-    private static SFXController instance;
+    private static PotionSFXController instance;
 
     private AudioSource audioSource;
 
@@ -16,7 +16,7 @@ public class SFXController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static SFXController GetInstance()
+    public static PotionSFXController GetInstance()
     {
         return instance;
     }
