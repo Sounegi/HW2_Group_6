@@ -22,6 +22,7 @@ public class ItemSpawner : MonoBehaviour
 
     private IEnumerator SpawnRandomItem()
     {
+        
         while(true)
         {
             yield return new WaitForSeconds(5.0f);

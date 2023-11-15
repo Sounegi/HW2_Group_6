@@ -2445,11 +2445,7 @@ MonoBehaviour:
   map: {fileID: 0}
   floor: {fileID: 502112624}
   _plane: {fileID: 502112624}
-<<<<<<< HEAD
   ranged: {fileID: 5634256067516793851, guid: ae5bf5ccf58fea84cb2e3ad9c2efa80e, type: 3}
-=======
-  ranged: {fileID: 5634256067516793851, guid: d376ec0dfd00b06409c0b2fc7de06ad7, type: 3}
->>>>>>> 29d56510cc5932dbdd519a96a7e75c3727f4ff9f
   small: {fileID: 5634256067516793851, guid: 954639e002ba2ef439166bfe0a4a2115, type: 3}
   big: {fileID: 5634256067516793851, guid: 3c10fd90f8866184cace286b00322cb5, type: 3}
   enemy_count: 3
