@@ -21,6 +21,7 @@ public class DetectAttack : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            print("inrange");
             playerfound = true;
         }else
             playerfound = false;
@@ -31,8 +32,17 @@ public class DetectAttack : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            print("inrange");
             playerfound = true;
-        }else
-        playerfound = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            print("inrange");
+            playerfound = false;
+        }
     }
 }
