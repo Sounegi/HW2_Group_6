@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
 
     [Header("Scenes")]
     [SerializeField] private string PlayScene = "Scene_1";
+    [SerializeField] private string SettingsScene = "Settings";
     [SerializeField] private string ControlScene = "Controls";
 
     void Awake()
@@ -63,6 +64,10 @@ public class MenuManager : MonoBehaviour
             if(arrowPosition == 0)
             {
                 StartCoroutine(ChangeScene(PlayScene));
+            }
+            else if(arrowPosition == 1)
+            {
+                StartCoroutine(ChangeScene(SettingsScene));
             }
             else if(arrowPosition == 2)
             {
