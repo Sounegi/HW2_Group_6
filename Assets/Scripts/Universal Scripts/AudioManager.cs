@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     public void PlayClip(int index, float volume)
     {
         audioSource.clip = clips[0];
-        audioSource.volume = Mathf.Clamp01(volume);
+        audioSource.volume = Mathf.Clamp01(volume * DataManager.GetInstance().GetVolume());
         audioSource.Play();
     }
 }
