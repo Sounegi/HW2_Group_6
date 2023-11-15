@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private static PlayerController instance;
     private Rigidbody rb;
     private Animator anim;
+    private BoxCollider weapon_hitbox;
 
     [Header("Speed Values")]
     [SerializeField] private float moveSpeed = 3.5f;
@@ -40,6 +41,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        weapon_hitbox = GetComponent<BoxCollider>();
+        weapon_hitbox.enabled = false;
     }
 
     private void Update()
@@ -100,11 +103,13 @@ public class PlayerController : MonoBehaviour
         if(context.performed && onGround)
         {
             attacking = true;
+            weapon_hitbox.enabled = true;
             AudioManager.GetInstance().PlaySoundEffect(0, SFXVolume);
         }
         if(context.canceled)
         {
             attacking = false;
+            weapon_hitbox.enabled = false;
         }
     }
 

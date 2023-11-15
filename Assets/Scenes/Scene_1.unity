@@ -1674,7 +1674,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777879233}
-  m_LocalRotation: {x: -0.018189488, y: 0.000000017203536, z: 3.1297526e-10, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189488, y: -0.000000017203536, z: -3.1297526e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1837,7 +1837,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.018189494, y: 0.000000034407073, z: 6.2595074e-10, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: -0.000000034407073, z: -6.2595074e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 2.5970001, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2575,7 +2575,7 @@ MonoBehaviour:
   floor: {fileID: 502112624}
   enemy_template: {fileID: 5634256067516793851, guid: 69c8ea13fbc195f45b128a6c1bd839c3, type: 3}
   _plane: {fileID: 502112624}
-  enemy_count: 15
+  enemy_count: 1
   enemy: []
 --- !u!4 &1591900119
 Transform:
@@ -7092,7 +7092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7724492519380038199, guid: f1ea52022bba0d147861c6e28478a8ce, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7752127342255215359, guid: f1ea52022bba0d147861c6e28478a8ce, type: 3}
       propertyPath: m_Layer
@@ -9589,6 +9589,7 @@ GameObject:
   - component: {fileID: 2019577142556982545}
   - component: {fileID: 2019577142556982544}
   - component: {fileID: 2019577142556982543}
+  - component: {fileID: 2019577142556982548}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -9840,6 +9841,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &2019577142556982548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679044529789544372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.4993453, z: 1.0527178}
+  m_Center: {x: 0, y: 0.9078784, z: 0.9869687}
 --- !u!4 &2118069739105632431
 Transform:
   m_ObjectHideFlags: 0

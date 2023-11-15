@@ -90,7 +90,7 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-
+        Destroy(this);
     }
 
 }
