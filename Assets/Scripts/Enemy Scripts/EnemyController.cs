@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
 
         public bool isDead()
         {
-            print(hp);
+            //print(hp);
             if (hp <= 0)
                 return true;
             else
@@ -144,9 +144,9 @@ public class EnemyController : MonoBehaviour
             if (enemy_type != 3)
                 return; // not range, just keep chasing.
             agent.isStopped = true;
-
-            // print("attack called");
-            Debug.Log(agent.transform.position);
+            
+            print("attack called");
+            //Debug.Log(agent.transform.position);
             GameObject bullet = Instantiate(bullet_holder, agent.transform.position, Quaternion.identity);
             // AudioSource audioSource = agent.GetComponent<AudioSource>();
             // AudioManager.GetInstance().PlaySoundEffect(3, 0.5f, audioSource);
@@ -210,22 +210,31 @@ public class EnemyController : MonoBehaviour
             if (dead)
             {
                 deleted_enemy.Add(singleenemy.Key);
-                //enemydict.Remove(singleenemy.Key);
-                //Destroy(singleenemy.Key);
                 continue;
             }
-            
+            //print(singleenemy.Value.enemy_type);
+            if(singleenemy.Value.enemy_type == 3)
+            {
+                HandleRange(singleenemy);
+            }
+            else
+            {
+                singleenemy.Value.Chase();
+            }
+
+            print(shoot_player && singleenemy.Value.enemy_type == 3);
             if (shoot_player && singleenemy.Value.enemy_type == 3)
             {
                 if (singleenemy.Value.shoot_interval <= 0)
                 {
+                    
                     singleenemy.Value.Attack();
                     // print("attacking!");
                 }
             }
             else
             {
-                singleenemy.Value.Chase();
+                
             }
             
         }
@@ -239,6 +248,22 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    void HandleRange(KeyValuePair<GameObject, EnemyInfo> singleenemy)
+    {
+        bool shoot_player = singleenemy.Value.foundPlayer();
+        if (shoot_player)
+        {
+            if (singleenemy.Value.shoot_interval <= 0)
+            {
+                singleenemy.Value.Attack();
+            }
+        }
+        else
+        {
+            singleenemy.Value.agent.isStopped = false;
+            singleenemy.Value.Chase();//.Attack();
+        }
+    }
     
     void OnDrawGizmosSelected()
     {
