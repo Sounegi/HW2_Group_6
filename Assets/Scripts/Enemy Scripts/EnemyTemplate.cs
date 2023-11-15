@@ -10,7 +10,7 @@ public class EnemyTemplate : MonoBehaviour {
     public DetectAttack detect;
     public event System.Action onHit;
 
-    void Awake () {
+    public void Awake () {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         detect = GetComponentInChildren<DetectAttack>();

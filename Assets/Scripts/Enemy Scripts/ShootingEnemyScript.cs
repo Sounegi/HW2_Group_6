@@ -5,7 +5,13 @@ using UnityEngine;
 public class ShootingEnemyScript : EnemyTemplate
 {
     [SerializeField] GameObject bulletPrefab;
+    private AudioManager audioPlayer;
     bool isAttacking = false;
+
+    private void Awake() {
+        base.Awake();
+        audioPlayer = GetComponent<AudioManager>();
+    }
 
     // Start is called before the first frame update
     void Start() {
@@ -39,6 +45,7 @@ public class ShootingEnemyScript : EnemyTemplate
         while (true) {
             GameObject bullet = Instantiate(bulletPrefab, agent.transform.position, Quaternion.identity);
             bullet.GetComponent<BulletScript>().ShootAt(player);
+            audioPlayer.PlayClip(0, 0.5f);
             yield return new WaitForSeconds(4.0f);
         }
     }
