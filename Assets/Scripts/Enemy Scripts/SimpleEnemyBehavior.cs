@@ -31,11 +31,12 @@ public class SimpleEnemyBehavior : MonoBehaviour
 
     //State
     public float sightRange, attackRange;
-    public bool playerInSight, playerInAttackRange;
+    public bool playerInSight, playerInAttackRange, wait;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        wait = false;
         agent = GetComponent<NavMeshAgent>();   
     }
 
@@ -48,10 +49,16 @@ public class SimpleEnemyBehavior : MonoBehaviour
 
 
         //if (!playerInSight && !playerInAttackRange) Patroling();
-        if (playerInSight && !playerInAttackRange) ChasePLayer();
-        if (playerInSight && playerInAttackRange) AttackPlayer();
+        if (wait) Waiting();
+        if (playerInSight && !playerInAttackRange && !wait) ChasePLayer();
+        if (playerInSight && playerInAttackRange && !wait) AttackPlayer();
     }
 
+
+    private void Waiting()
+    {
+        agent.SetDestination(transform.position);
+    }
 
     private void Patroling()
     {
@@ -102,7 +109,7 @@ public class SimpleEnemyBehavior : MonoBehaviour
         }
     }
 
-    protected void ResetAttack()
+    protected virtual void ResetAttack()
     {
         alreadyAttacked = false;
     }
