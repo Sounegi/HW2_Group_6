@@ -13,9 +13,13 @@ GameObject:
   - component: {fileID: 3353730760461982977}
   - component: {fileID: 3035996190284492343}
   - component: {fileID: -2279073615236582754}
+<<<<<<< HEAD:Assets/Prefabs/Arena Resources/EnemyTemplate.prefab
   - component: {fileID: 6435484440690912479}
+=======
+  - component: {fileID: 5939641251320222376}
+>>>>>>> 7775dbe84fe1acf81381c7b749db1fb50ac3c42e:Assets/Prefabs/Arena Resources/Ranged_Enemy.prefab
   m_Layer: 0
-  m_Name: EnemyTemplate
+  m_Name: Ranged_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,8 +114,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 1
+  m_Speed: 1.5
+  m_Acceleration: 1.5
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -122,14 +126,20 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+<<<<<<< HEAD:Assets/Prefabs/Arena Resources/EnemyTemplate.prefab
 --- !u!82 &6435484440690912479
 AudioSource:
+=======
+--- !u!114 &5939641251320222376
+MonoBehaviour:
+>>>>>>> 7775dbe84fe1acf81381c7b749db1fb50ac3c42e:Assets/Prefabs/Arena Resources/Ranged_Enemy.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5634256067516793851}
   m_Enabled: 1
+<<<<<<< HEAD:Assets/Prefabs/Arena Resources/EnemyTemplate.prefab
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
@@ -218,6 +228,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9c83199191c7249b59c103e0752ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gothit: 0
+>>>>>>> 7775dbe84fe1acf81381c7b749db1fb50ac3c42e:Assets/Prefabs/Arena Resources/Ranged_Enemy.prefab
 --- !u!1 &5818424063717260861
 GameObject:
   m_ObjectHideFlags: 0

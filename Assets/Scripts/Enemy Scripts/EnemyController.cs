@@ -10,46 +10,88 @@ public class EnemyController : MonoBehaviour
     public GameObject Patrol, dest_hold, player, bullet;
     public class EnemyInfo
     {
-        public NavMeshAgent agent;
-        public int hp;
+        //patrol stuff
         public bool isPatrolling;
         public Vector3 destination_target;
         float roam_distance, map_x_size, map_z_size;
-        public GameObject dest_hold, player, bullet_holder;
-        List<GameObject> patrol_points;
-        int val = 0;
         float speed, acceleration;
         float patrol_time = 3f, remain_time;
         int lastchosen;
+        List<GameObject> patrol_points;
+        // patrol stuff end
+
+        //enemy basic information
+        public NavMeshAgent agent;
+        public int hp;
+        public GameObject dest_hold, player, bullet_holder;
         public int enemy_type;
         public float shoot_interval;
         DetectAttack detect;
+        EnemyHealthManager manage;
+        //end
 
         public EnemyInfo(NavMeshAgent a, Vector3 dest, float roam, float x, float z, GameObject template_target, 
-            GameObject player_info, int type, DetectAttack detection)
+            GameObject player_info, int type, DetectAttack detection, EnemyHealthManager info)
         {
             agent = a;
+            //patrol stuff
             destination_target = dest;
             roam_distance = roam;
             isPatrolling = false;
-            agent.SetDestination(agent.transform.position);
-            bullet_holder = template_target;
-            player = player_info;
-            enemy_type = type;
             map_x_size = x;
             map_z_size = z;
             speed = agent.speed;
             acceleration = agent.acceleration;
             remain_time = patrol_time;
-            //patrol_points = points;
             lastchosen = -1;
-            detect = detection;
+            //patrol_points = points;
+            // patrol stuff end
+
+            //basic info
+            
+            agent.SetDestination(agent.transform.position);
+            bullet_holder = template_target;
+            player = player_info;
+            enemy_type = type;
             shoot_interval = -1;
+            detect = detection;
+            hp = SetHP(type);
+            manage = info;
+
+            manage.onHit += damaged;
+        }
+
+        private int SetHP(int enemy_type)
+        {
+            if (enemy_type == 1 || enemy_type == 3)
+                return 1;
+            else
+                return 3;
         }
         public bool foundPlayer()
         {
             return detect.playerfound;
         }
+
+        public void damaged()
+        {
+            print("kepukul di damaged");
+            //if (manage.gothit)
+             hp -= 1;
+
+            //return manage.gothit;
+        }
+
+        public bool isDead()
+        {
+            print(hp);
+            if (hp <= 0)
+                return true;
+            else
+                return false;
+        }
+
+
         private Vector3 FixBoundary(Vector3 new_dest)
         {
             if (new_dest.x > map_x_size)
@@ -99,6 +141,8 @@ public class EnemyController : MonoBehaviour
 
         public void Attack()
         {
+            if (enemy_type != 3)
+                return; // not range, just keep chasing.
             agent.isStopped = true;
 
             print("attack called");
@@ -117,10 +161,14 @@ public class EnemyController : MonoBehaviour
     }
 
     public Spawner spawner;
+    Scene current_scene;
+    string current_scene_string;
     Dictionary<GameObject, EnemyInfo> enemydict = new Dictionary<GameObject, EnemyInfo>();
     void Start()
     {
-        List<GameObject> enemylist = spawner.enemy;
+        List<KeyValuePair<GameObject, int>> enemylist = spawner.enemy;
+        current_scene = SceneManager.GetActiveScene();
+        current_scene_string = current_scene.name;
         /*
         List<GameObject> patrol_points = new List<GameObject>();
         foreach (Transform point in Patrol.GetComponentsInChildren<Transform>())
@@ -129,35 +177,46 @@ public class EnemyController : MonoBehaviour
         }
         */
         int type;
-        foreach (GameObject enemy in enemylist)
+        foreach (KeyValuePair<GameObject, int> enemy in enemylist)
         {
             //1 = small fast
             //2 = big and slow
             //3 = ranged
-            type = Random.Range(1, 3);
-            type = 3;
-            NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
-            DetectAttack detection = enemy.GetComponentInChildren<DetectAttack>();
-            enemydict.Add(enemy, new EnemyInfo(agent, Vector3.zero, roam_distance, 200f, 200f, dest_hold, player, type, detection));
+            NavMeshAgent agent = enemy.Key.GetComponent<NavMeshAgent>();
+            DetectAttack detection = enemy.Key.GetComponentInChildren<DetectAttack>();
+            EnemyHealthManager manage = enemy.Key.GetComponent<EnemyHealthManager>();
+
+            type = enemy.Value;
+            enemydict.Add(enemy.Key, new EnemyInfo(agent, Vector3.zero, roam_distance, 200f, 200f, dest_hold, player, type, detection, manage));
         }
+        Destroy(spawner);
     }
 
     // Update is called once per frame
 
-    private void FixedUpdate()
-    {
-        
-    }
+    
     void Update()
     {
+        List<GameObject> deleted_enemy = new List<GameObject>();
         foreach (KeyValuePair<GameObject, EnemyInfo> singleenemy in enemydict)
         {
             bool shoot_player = singleenemy.Value.foundPlayer();
+            //bool hitted = singleenemy.Value.damaged();
+            bool dead = singleenemy.Value.isDead();
             singleenemy.Value.shoot_interval -= Time.deltaTime;
             //SphereCollider range = singleenemy.Key.GetComponent<SphereCollider>();
-            if (shoot_player)
+
+            if (dead)
             {
-                if (singleenemy.Value.enemy_type == 3 && singleenemy.Value.shoot_interval <= 0)
+                deleted_enemy.Add(singleenemy.Key);
+                //enemydict.Remove(singleenemy.Key);
+                //Destroy(singleenemy.Key);
+                continue;
+            }
+            
+            if (shoot_player && singleenemy.Value.enemy_type == 3)
+            {
+                if (singleenemy.Value.shoot_interval <= 0)
                 {
                     singleenemy.Value.Attack();
                     print("attacking!");
@@ -166,6 +225,24 @@ public class EnemyController : MonoBehaviour
             else
             {
                 singleenemy.Value.Chase();
+            }
+            
+        }
+        foreach(GameObject delete in deleted_enemy)
+        {
+            enemydict.Remove(delete);
+            Destroy(delete);
+        }
+
+        if(enemydict.Count == 0)
+        {
+            if(current_scene_string == "Scene_1")
+            {
+                SceneManager.LoadScene("Sample Level");
+            }
+            if(current_scene_string == "Scene_2")
+            {
+                SceneManager.LoadScene("Sample Level");
             }
         }
     }
@@ -179,18 +256,6 @@ public class EnemyController : MonoBehaviour
         foreach (KeyValuePair<GameObject, EnemyInfo> singleenemy in enemydict)
         {
             Gizmos.DrawSphere(singleenemy.Key.transform.position, 10f);
-        }
-    }
-    
-    private void OnTriggerStay(Collider other)
-    {
-        // Check if the collider belongs to one of the controlled objects
-        if (other.CompareTag("Player"))
-        {
-        // Do something while the object stays in the trigger zone
-            GameObject getObject = other.gameObject;
-            EnemyInfo enemy_data = enemydict[getObject];
-            enemy_data.Attack();
         }
     }
 }
