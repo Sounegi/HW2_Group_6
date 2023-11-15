@@ -23,7 +23,7 @@ public class HealingItem : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             HealthManager.GetInstance().AddHealth(1);
-            PotionSFXManager.GetInstance().PlayClip();
+            SFXController.GetInstance().PlayClip();
             Destroy(gameObject);
         }
     }
