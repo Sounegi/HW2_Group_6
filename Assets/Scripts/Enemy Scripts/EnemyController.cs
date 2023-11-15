@@ -75,7 +75,7 @@ public class EnemyController : MonoBehaviour
 
         public void damaged()
         {
-            print("kepukul di damaged");
+            // print("kepukul di damaged");
             //if (manage.gothit)
              hp -= 1;
 
@@ -145,11 +145,11 @@ public class EnemyController : MonoBehaviour
                 return; // not range, just keep chasing.
             agent.isStopped = true;
 
-            print("attack called");
+            // print("attack called");
             Debug.Log(agent.transform.position);
             GameObject bullet = Instantiate(bullet_holder, agent.transform.position, Quaternion.identity);
-            AudioSource audioSource = agent.GetComponent<AudioSource>();
-            AudioManager.GetInstance().PlaySoundEffect(3, 0.5f, audioSource);
+            // AudioSource audioSource = agent.GetComponent<AudioSource>();
+            // AudioManager.GetInstance().PlaySoundEffect(3, 0.5f, audioSource);
             //bullet.name = "kontol";
             Rigidbody bull_rb = bullet.GetComponent<Rigidbody>();
             Vector3 direction = player.transform.position - bullet.transform.position;
@@ -219,7 +219,7 @@ public class EnemyController : MonoBehaviour
                 if (singleenemy.Value.shoot_interval <= 0)
                 {
                     singleenemy.Value.Attack();
-                    print("attacking!");
+                    // print("attacking!");
                 }
             }
             else
@@ -234,17 +234,17 @@ public class EnemyController : MonoBehaviour
             Destroy(delete);
         }
 
-        if(enemydict.Count == 0)
-        {
-            if(current_scene_string == "Scene_1")
-            {
-                SceneManager.LoadScene("Sample Level");
-            }
-            if(current_scene_string == "Scene_2")
-            {
-                SceneManager.LoadScene("Sample Level");
-            }
-        }
+        // if(enemydict.Count == 0)
+        // {
+        //     if(current_scene_string == "Scene_1")
+        //     {
+        //         SceneManager.LoadScene("Sample Level");
+        //     }
+        //     if(current_scene_string == "Scene_2")
+        //     {
+        //         SceneManager.LoadScene("Sample Level");
+        //     }
+        // }
     }
 
     

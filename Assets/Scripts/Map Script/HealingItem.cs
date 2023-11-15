@@ -10,7 +10,7 @@ public class HealingItem : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             HealthManager.GetInstance().AddHealth(1);
-            AudioManager.GetInstance().PlaySoundEffect(1, volume);
+            // AudioManager.GetInstance().PlaySoundEffect(1, volume);
             Destroy(gameObject);
         }
     }
