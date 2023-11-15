@@ -7,10 +7,11 @@ public class Spawner : MonoBehaviour
 {
     // Start is called before the first frame update
     public Terrain map;
-    public GameObject floor, enemy_template, _plane;
+    public GameObject floor, _plane;
+    public GameObject ranged, small, big;
     public int enemy_count;
     float map_x_size, map_z_size;
-    public List<GameObject> enemy = new List<GameObject>();
+    public List<KeyValuePair<GameObject, int>> enemy = new List<KeyValuePair<GameObject, int>>();
 
     void Awake()
     {
@@ -44,8 +45,21 @@ public class Spawner : MonoBehaviour
             }
         }
         randomSpawnPosition = new Vector3(randomSpawnPosition.x, hit.point.y, randomSpawnPosition.z);
-        GameObject musuh = Instantiate(enemy_template, randomSpawnPosition, Quaternion.identity);
-        enemy.Add(musuh);
+        int randomNum = Random.Range(1,4);
+        GameObject musuh;
+
+        if(randomNum == 1)
+            musuh = Instantiate(small, randomSpawnPosition, Quaternion.identity);
+        else if(randomNum == 2)
+            musuh = Instantiate(big, randomSpawnPosition, Quaternion.identity);
+        else if(randomNum == 3)
+            musuh = Instantiate(ranged, randomSpawnPosition, Quaternion.identity);
+        else
+            musuh = Instantiate(ranged, randomSpawnPosition, Quaternion.identity);
+
+
+        KeyValuePair<GameObject, int> enemydone = new KeyValuePair<GameObject, int>(musuh, randomNum);
+        enemy.Add(enemydone);
     }
 
     void GenerateRandomAtPlane()
@@ -78,19 +92,28 @@ public class Spawner : MonoBehaviour
             }
         }
         randomSpawnPosition = new Vector3(randomSpawnPosition.x, hit.position.y + 1f, randomSpawnPosition.z);
-        GameObject musuh = Instantiate(enemy_template, randomSpawnPosition, Quaternion.identity);
-        //GameObject test = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Cube), randomSpawnPosition, Quaternion.identity);
-        //test.name = "ngengto";
-        //enemy_template.transform.localScale *= 0.3f;
-        //enemy_template.transform.localScale *= 0.3f;
-        enemy.Add(musuh);
+
+        int randomNum = Random.Range(1, 4);
+        GameObject musuh;
+        if (randomNum == 1)
+            musuh = Instantiate(small, randomSpawnPosition, Quaternion.identity);
+        else if (randomNum == 2)
+            musuh = Instantiate(big, randomSpawnPosition, Quaternion.identity);
+        else if (randomNum == 3)
+            musuh = Instantiate(ranged, randomSpawnPosition, Quaternion.identity);
+        else
+            musuh = Instantiate(ranged, randomSpawnPosition, Quaternion.identity);
+
+
+        KeyValuePair<GameObject, int> enemydone = new KeyValuePair<GameObject, int>(musuh, randomNum);
+        enemy.Add(enemydone);
     }
 
     // Update is called once per frame
 
     void Update()
     {
-
+        Destroy(this);
     }
 
 }
