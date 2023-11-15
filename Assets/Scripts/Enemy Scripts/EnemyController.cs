@@ -194,7 +194,8 @@ public class EnemyController : MonoBehaviour
 
     // Update is called once per frame
 
-    
+    public event System.Action OnEnd;
+
     void Update()
     {
         List<GameObject> deleted_enemy = new List<GameObject>();
@@ -234,17 +235,8 @@ public class EnemyController : MonoBehaviour
             Destroy(delete);
         }
 
-        // if(enemydict.Count == 0)
-        // {
-        //     if(current_scene_string == "Scene_1")
-        //     {
-        //         SceneManager.LoadScene("Sample Level");
-        //     }
-        //     if(current_scene_string == "Scene_2")
-        //     {
-        //         SceneManager.LoadScene("Sample Level");
-        //     }
-        // }
+        if (enemydict.Count == 0) OnEnd?.Invoke();
+
     }
 
     
