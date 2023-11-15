@@ -1038,13 +1038,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b190286ad6dd0a442b65fa3a8ac29fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefabs:
-  - {fileID: 4083282651425657373, guid: 47e67b83b4135c74c9d865aead63df67, type: 3}
-  spawnTime:
-  - 5
-  - 7
-  lowerCoordinate: {x: -40, y: 1.5, z: -40}
-  upperCoordinate: {x: 40, y: 1.5, z: 40}
+  lowerCoordinate: {x: -20, y: 15, z: 20}
+  upperCoordinate: {x: 20, y: 15, z: 20}
+  potion: {fileID: 4083282651425657373, guid: 47e67b83b4135c74c9d865aead63df67, type: 3}
 --- !u!4 &567464927
 Transform:
   m_ObjectHideFlags: 0
@@ -2437,7 +2433,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591900117}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc788600cade08941a1a4a433e531fc8, type: 3}
   m_Name: 
@@ -8531,7 +8527,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814542044}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7affa8ca72de73344a188356cb4cb9f4, type: 3}
   m_Name: 

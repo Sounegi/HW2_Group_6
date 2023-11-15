@@ -20446,6 +20446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 629780601811396188}
+  - component: {fileID: 822876269441853751}
   m_Layer: 0
   m_Name: Arena2 New
   m_TagString: Untagged
@@ -20471,6 +20472,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &822876269441853751
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364599490177060599}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4366109598191717381
 GameObject:
   m_ObjectHideFlags: 0
@@ -36146,6 +36163,7 @@ GameObject:
   - component: {fileID: 8419255420755005710}
   - component: {fileID: 8426952764965543370}
   - component: {fileID: 8378138541938414954}
+  - component: {fileID: 7018611581471622629}
   m_Layer: 0
   m_Name: greek_floor
   m_TagString: Untagged
@@ -36232,6 +36250,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 064b6ba9d50ee47918dbd37de665fa98, type: 3}
+--- !u!65 &7018611581471622629
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404953345808927022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12, y: 1.9999998, z: 12}
+  m_Center: {x: 0, y: -0.9999999, z: 0}
 --- !u!1 &8430175905346755020
 GameObject:
   m_ObjectHideFlags: 0
