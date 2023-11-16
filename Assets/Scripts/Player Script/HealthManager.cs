@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour
 
     void Awake()
     {
+        currentHealth = maxHealth;
         if (instance == null)
         {
             instance = this;
@@ -44,7 +45,7 @@ public class HealthManager : MonoBehaviour
 
     public void Reset()
     {
-        currentHealth =  maxHealth;
+        currentHealth =  currentHealth;
     }
 
     public void AddHealth(int deltaHealth)
