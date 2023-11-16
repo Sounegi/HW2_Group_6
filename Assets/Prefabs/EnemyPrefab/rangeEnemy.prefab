@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Bits: 64
   isPlayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   showGizmo: 1
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 0

@@ -105,6 +105,18 @@ public class ChargeEnemyBehavior : MonoBehaviour
         alreadyAttacked = false;
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 5f);
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnDrawGizmosSelected()
     {
 
