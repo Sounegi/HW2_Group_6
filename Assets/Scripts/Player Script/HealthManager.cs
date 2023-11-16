@@ -24,12 +24,12 @@ public class HealthManager : MonoBehaviour
 
     void Start()
     {
-        currentHealth = 1;
+        Reset();
     }
 
-    void Update()
+    public void Reset()
     {
-        adjustHealth();
+        currentHealth = 1;
     }
 
     public void adjustHealth()
@@ -49,6 +49,8 @@ public class HealthManager : MonoBehaviour
     public void AddHealth(int deltaHealth)
     {
         currentHealth += deltaHealth;
+        adjustHealth();
+        
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -56,6 +58,11 @@ public class HealthManager : MonoBehaviour
         if (currentHealth < 0)
         {
             currentHealth = 0;
+        }
+
+        if(currentHealth == 0)
+        {
+            MapManager.GetInstance().GameOver();
         }
     }
 

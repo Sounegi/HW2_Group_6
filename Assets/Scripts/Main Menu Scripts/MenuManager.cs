@@ -22,6 +22,15 @@ public class MenuManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+
+        if(CanvasMaintainer.GetInstance() != null)
+        {
+            Destroy(CanvasMaintainer.GetInstance().gameObject);
+        }
+        if(MapManager.GetInstance() != null)
+        {
+            Destroy(MapManager.GetInstance().gameObject);
+        }
     }
 
     public static MenuManager GetInstance()

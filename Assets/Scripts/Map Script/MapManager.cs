@@ -10,6 +10,8 @@ public class MapManager : MonoBehaviour
     public List<string> nextScene;
     private int sceneIDX = 0;
 
+    public string gameOver;
+
     void Awake()
     {   
         if(instance == null)
@@ -30,12 +32,17 @@ public class MapManager : MonoBehaviour
 
     void Start()
     {
-        Reset();
+        HealthManager.GetInstance().Reset();
     }
 
     public void EndScene()
     {
         StartCoroutine(ChangeScene(nextScene[sceneIDX]));
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(ChangeScene(gameOver));
     }
 
     private IEnumerator ChangeScene(string scene)
@@ -44,16 +51,8 @@ public class MapManager : MonoBehaviour
         ImageFade.GetInstance().StartFade(Color.black, 2f);
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(scene);
-        if(nextScene[sceneIDX] == "Main Menu")
-        {
-            Destroy(gameObject);
-            Destroy(MapManager.GetInstance().gameObject);
-        }
-        else
-        {
-            sceneIDX += 1;
-            Reset();
-        }   
+        sceneIDX += 1;
+        Reset();
     }
 
     private void Reset()
