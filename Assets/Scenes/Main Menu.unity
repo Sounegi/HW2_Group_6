@@ -1159,6 +1159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4dd49f3973f8740826a29b76bc64de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 0}
 --- !u!1 &1518072883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,7 +1521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftArrow: {fileID: 1656114132}
   rightArrow: {fileID: 1858009173}
-  PlayScene: Scene_1
+  PlayScene: bobby1
   SettingsScene: Settings
   ControlScene: Controls
 --- !u!4 &1667200340

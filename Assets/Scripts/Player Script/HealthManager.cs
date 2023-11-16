@@ -9,8 +9,6 @@ public class HealthManager : MonoBehaviour
 
     private int maxHealth = 3;
     private int currentHealth;
-    public List<Sprite> heartSprites;
-    public List<Image> hearts;
 
     void Awake()
     {
@@ -35,29 +33,24 @@ public class HealthManager : MonoBehaviour
         Reset();
     }
 
+    void Update()
+    {
+        if(HeartManager.GetInstance() != null)
+        {
+            HeartManager.GetInstance().AdjustHealth(currentHealth);
+        }
+        
+    }
+
     public void Reset()
     {
         currentHealth =  maxHealth;
     }
 
-    public void adjustHealth()
-    {
-        for (int i = 0; i < hearts.Count; i++)
-        {
-            if(i < currentHealth)
-            {
-                hearts[i].sprite = heartSprites[0];
-            }
-            else
-            {
-                hearts[i].sprite = heartSprites[1];
-            }
-        }
-    }
     public void AddHealth(int deltaHealth)
     {
         currentHealth += deltaHealth;
-        adjustHealth();
+        // adjustHealth();
         
         if (currentHealth > maxHealth)
         {
@@ -78,7 +71,7 @@ public class HealthManager : MonoBehaviour
     {
         Debug.Log("Health before " +  currentHealth.ToString());
         currentHealth -= damage;
-        adjustHealth();
+        // HeartManager.GetInstance().AdjustHealth(currentHealth);
         Debug.Log("Health after " + currentHealth.ToString());
 
         if (currentHealth > maxHealth)

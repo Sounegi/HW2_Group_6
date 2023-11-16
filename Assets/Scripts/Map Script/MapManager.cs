@@ -7,8 +7,7 @@ public class MapManager : MonoBehaviour
 {
     private static MapManager instance;
 
-    public List<string> nextScene;
-    private int sceneIDX = 0;
+    public string nextScene;
 
     public string gameOver;
 
@@ -17,7 +16,6 @@ public class MapManager : MonoBehaviour
         if(instance == null)
 		{	
 			instance = this;
-			DontDestroyOnLoad(gameObject);
 		}
 		else if(instance != this)
         {
@@ -37,7 +35,7 @@ public class MapManager : MonoBehaviour
 
     public void EndScene()
     {
-        StartCoroutine(ChangeScene(nextScene[sceneIDX]));
+        StartCoroutine(ChangeScene(nextScene));
     }
 
     public void GameOver()
@@ -47,12 +45,9 @@ public class MapManager : MonoBehaviour
 
     private IEnumerator ChangeScene(string scene)
     {
-        print("pindah ke scene:" + scene);
         ImageFade.GetInstance().StartFade(Color.black, 2f);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(scene);
-        sceneIDX += 1;
-        Reset();
     }
 
     private void Reset()
