@@ -44,6 +44,7 @@ public class Timer : MonoBehaviour
         prevTime = Time.time;
         seconds = 0;
         minutes = 0;
+        timerActive = true;
     }
 
     public void StopTimer() {

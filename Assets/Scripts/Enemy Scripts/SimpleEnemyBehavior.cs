@@ -32,7 +32,7 @@ public class SimpleEnemyBehavior : MonoBehaviour
     //State
     public float sightRange, attackRange;
     public bool playerInSight, playerInAttackRange, wait;
-
+    public GameObject particle;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -47,7 +47,6 @@ public class SimpleEnemyBehavior : MonoBehaviour
         //check detector
         playerInSight = Physics.CheckSphere(transform.position, sightRange, isPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, isPlayer);
-
 
         //if (!playerInSight && !playerInAttackRange) Patroling();
         if (wait) Waiting();
@@ -124,6 +123,7 @@ public class SimpleEnemyBehavior : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        Destroy(Instantiate(particle, this.transform.position, Quaternion.identity), 0.5f);
         Destroy(this.gameObject);
     }
 

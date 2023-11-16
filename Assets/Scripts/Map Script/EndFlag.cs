@@ -10,8 +10,8 @@ public class EndFlag : MonoBehaviour
     void Start()
     {
         // this.enabled = false;   
-        //GetComponent<MeshRenderer>().enabled = false;
-        //GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
         
     }
 

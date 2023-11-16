@@ -87,6 +87,7 @@ MonoBehaviour:
   playerInSight: 0
   playerInAttackRange: 0
   wait: 0
+  particle: {fileID: 7187087914551853158, guid: a73e6424003edcf4cafc5134ea329e73, type: 3}
   bulletPrefab: {fileID: 1098493074325147365, guid: a4b58248bf49590468b08cb88cfdde62, type: 3}
 --- !u!195 &8864755756994395148
 NavMeshAgent:
@@ -118,8 +119,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721867802990893195}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1.5, z: 0}

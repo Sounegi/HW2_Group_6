@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
+    public GameObject particle;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            //do damage to player
             HealthManager.GetInstance().DoDamage(1);
+            Instantiate(particle, other.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
+        if (other.tag == "Ground") //|| other.tag == "Wall")
+        {
+            Destroy(this.gameObject);
+        }
+        
     }
 }
