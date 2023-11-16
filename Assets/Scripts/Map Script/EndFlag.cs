@@ -9,11 +9,11 @@ public class EndFlag : MonoBehaviour
 
     void Start()
     {
-        // this.enabled = false;   
-        // GetComponent<MeshRenderer>().enabled = false;
-        // GetComponent<CapsuleCollider>().enabled = false;
-        // tracker = GameObject.Find("EnemyController").GetComponent<EnemyController>();
-        // tracker.OnEnd += enable_portal;
+        this.enabled = false;   
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
+        tracker = GameObject.Find("EnemyController").GetComponent<EnemyController>();
+        tracker.OnEnd += enable_portal;
     }
 
     public void enable_portal()
