@@ -11,6 +11,18 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
     //animation
     //private Animator spearAnim;
 
+    private bool triggered;
+
+    private void Awake()
+    {
+        triggered = false;
+        wait = false;
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        player = GameObject.Find("Player").transform;
+        //base.Awake();
+        health = 1;
+    }
+
     protected override void AttackPlayer()
     {
         agent.SetDestination(transform.position);
@@ -38,12 +50,29 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
     }
 
 
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        //Debug.Log("fastenemy_colided");
+        
+        if(other.tag == "Player" && !triggered)
         {
-            Debug.Log("Hit da player");
+            triggered = true;
+            Debug.Log("fast_enemy_collided");
+            //Debug.Log("Hit da player");
             HealthManager.GetInstance().DoDamage(1);
         }
+
+        if (other.tag == "Axe")
+        {
+            Debug.Log("Hit monster");
+            TakeDamage(1);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        triggered = false;
+        //this.GetComponent<BoxCollider>().enabled = true;
     }
 }

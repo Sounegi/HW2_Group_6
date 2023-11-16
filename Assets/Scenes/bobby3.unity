@@ -8443,7 +8443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1633715071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8457,7 +8457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene:
-  - Main Menu
+  - Scene_2
   - Scene_3
   - Main Menu
   gameOver: 
@@ -9582,7 +9582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3492855718324001376, guid: 99f726cf9d16fe4449547c55abb9c674, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 7.81
       objectReference: {fileID: 0}
     - target: {fileID: 3492855718324001376, guid: 99f726cf9d16fe4449547c55abb9c674, type: 3}
       propertyPath: m_LocalRotation.w
