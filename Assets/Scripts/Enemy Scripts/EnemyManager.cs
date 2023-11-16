@@ -32,6 +32,7 @@ public class EnemyManager : MonoBehaviour {
 
     public void DecreaseEnemy() {
         enemyCount--;
+        ScoreManager.GetInstance().Increment();
         if (enemyCount <= 0)
             enemyCount = 0;
     }

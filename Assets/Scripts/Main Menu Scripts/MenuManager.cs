@@ -28,6 +28,11 @@ public class MenuManager : MonoBehaviour
             Destroy(HealthManager.GetInstance().gameObject);
         }
 
+        if(ScoreManager.GetInstance() != null)
+        {
+            Destroy(ScoreManager.GetInstance().gameObject);
+        }
+
         if(MapManager.GetInstance() != null)
         {
             Destroy(MapManager.GetInstance().gameObject);

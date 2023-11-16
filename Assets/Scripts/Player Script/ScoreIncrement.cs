@@ -5,35 +5,38 @@ using TMPro;
 
 public class ScoreIncrement : MonoBehaviour
 {
+    private static ScoreIncrement instance;
+
     private int scoreValue;
     private TextMeshProUGUI scoreText;
     
     public bool toggler1 = true;
     private bool toggler2 = false;
 
-    void Start()
+    void Awake()
     {
-        Reset();
-        scoreText = GetComponent<TextMeshProUGUI>();
-    }
-
-    void Update()
-    {
-        if(toggler1 == toggler2)
+        if (instance == null)
         {
-            IncrementScore();
-            toggler2 = !toggler2;
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
         }
     }
 
-    public void IncrementScore(int val = 100)
+    public static ScoreIncrement GetInstance()
     {
-        scoreValue += val;
-        scoreText.text = scoreValue.ToString();
+        return instance;
     }
 
-    public void Reset()
+    void Start()
     {
-        scoreValue = 0;
+        scoreText = GetComponent<TextMeshProUGUI>();
+    }
+
+    public void SetScore(int val)
+    {
+        scoreText.text = val.ToString();
     }
 }
