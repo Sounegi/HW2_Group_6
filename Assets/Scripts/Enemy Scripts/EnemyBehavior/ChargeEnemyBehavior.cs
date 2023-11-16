@@ -23,9 +23,11 @@ public class ChargeEnemyBehavior : MonoBehaviour
     public float chargeSpeed, normalSpeed;
 
     private bool triggered;
+    public GameObject particle;
 
     private void Awake()
     {
+        //particle = GameObject.Find("Blood Splat").GetComponent<ParticleSystem>();
         triggered = false;
         alreadyAttacked = false;
         isCooldown = false;
@@ -107,8 +109,13 @@ public class ChargeEnemyBehavior : MonoBehaviour
             Debug.Log("charge_enemy_collided");
             //Debug.Log("Hit da player");
             HealthManager.GetInstance().DoDamage(2);
+            Instantiate(particle, collision.transform.position, Quaternion.identity);
         }
     }
+
+
+        
+
 
     //Cooldown
     private void CoolingDown()
@@ -135,12 +142,14 @@ public class ChargeEnemyBehavior : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        Destroy(Instantiate(particle, this.transform.position, Quaternion.identity), 0.5f);
         Destroy(this.gameObject);
     }
 
     private void OnDestroy()
     {
         EnemyManager.GetInstance().DecreaseEnemy();
+        
     }
 
     private void OnDrawGizmosSelected()

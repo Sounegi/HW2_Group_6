@@ -357,6 +357,7 @@ MonoBehaviour:
   playerInSight: 0
   playerInAttackRange: 0
   wait: 0
+  particle: {fileID: 7187087914551853158, guid: a73e6424003edcf4cafc5134ea329e73, type: 3}
 --- !u!195 &9028981898599651134
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -367,7 +368,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

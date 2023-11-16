@@ -15,6 +15,7 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
 
     private void Awake()
     {
+        //particle = GameObject.Find("Blood Splat").GetComponent<ParticleSystem>();
         triggered = false;
         wait = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -61,11 +62,13 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
             Debug.Log("fast_enemy_collided");
             //Debug.Log("Hit da player");
             HealthManager.GetInstance().DoDamage(1);
+            Instantiate(particle, other.gameObject.transform.position, Quaternion.identity);
         }
 
         if (other.tag == "Axe")
         {
             Debug.Log("Hit monster");
+
             TakeDamage(1);
         }
     }
