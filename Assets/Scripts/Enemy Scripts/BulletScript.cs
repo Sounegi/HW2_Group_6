@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [SerializeField] GameObject playerBloodPrefab;
     // Start is called before the first frame update
     void Start() {
         Destroy(gameObject, 3.0f);
@@ -20,6 +22,7 @@ public class BulletScript : MonoBehaviour
         {
             Destroy(gameObject);
             HealthManager.GetInstance().AddHealth(-1);
+            Instantiate(playerBloodPrefab, collision.transform.Find("HeartPosition").position, Quaternion.identity);
         }
     }
 

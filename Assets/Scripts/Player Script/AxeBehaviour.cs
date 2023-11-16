@@ -9,6 +9,7 @@ public class AxeBehaviour : MonoBehaviour
     private SphereCollider col;
     private AudioManager audioPlayer;
     private bool attacking;
+    [SerializeField] GameObject bloodPrefab;
 
     void Awake()
     {
@@ -41,6 +42,10 @@ public class AxeBehaviour : MonoBehaviour
     {
         attacking = false;
         col.enabled = false;
+    }
+
+    public void SpawnBlood() {
+        Instantiate(bloodPrefab, transform.position, Quaternion.identity);
     }
 
 }
