@@ -3,7 +3,13 @@ guid: 6c352028114d0f94b926bd5d32c48997
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - agent: {instanceID: 0}
+  - player: {instanceID: 0}
+  - detect: {instanceID: 0}
+  - hit: {instanceID: 0}
+  - enemyBloodPrefab: {fileID: 7187087914551853158, guid: a73e6424003edcf4cafc5134ea329e73, type: 3}
+  - playerBloodPrefab: {fileID: 7187087914551853158, guid: a73e6424003edcf4cafc5134ea329e73, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

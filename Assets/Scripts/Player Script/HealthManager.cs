@@ -14,7 +14,15 @@ public class HealthManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public static HealthManager GetInstance()
@@ -29,7 +37,7 @@ public class HealthManager : MonoBehaviour
 
     public void Reset()
     {
-        currentHealth = 1;
+        currentHealth =  maxHealth;
     }
 
     public void adjustHealth()
@@ -68,6 +76,23 @@ public class HealthManager : MonoBehaviour
 
     public void DoDamage(int damage)
     {
+        Debug.Log("Health before " +  currentHealth.ToString());
         currentHealth -= damage;
+        adjustHealth();
+        Debug.Log("Health after " + currentHealth.ToString());
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+
+        if (currentHealth == 0)
+        {
+            MapManager.GetInstance().GameOver();
+        }
     }
 }

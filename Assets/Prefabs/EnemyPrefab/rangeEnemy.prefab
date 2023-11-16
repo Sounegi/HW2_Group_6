@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7818902848107521905}
   - component: {fileID: 8864755756994395187}
   - component: {fileID: 8864755756994395148}
+  - component: {fileID: 5839879741432750199}
   m_Layer: 0
   m_Name: rangeEnemy
   m_TagString: Untagged
@@ -80,7 +81,7 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 0
   health: 20
-  timeBetweenAttacks: 10
+  timeBetweenAttacks: 1
   sightRange: 30
   attackRange: 10
   playerInSight: 0
@@ -109,6 +110,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &5839879741432750199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721867802990893195}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &7818902848098030753
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,17 @@ public class ImageFade : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        //instance = this;
         image = GetComponent<Image>();
     }
 
