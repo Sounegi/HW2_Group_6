@@ -22,8 +22,11 @@ public class ChargeEnemyBehavior : MonoBehaviour
     public float chargingTime, cooldownTime;
     public float chargeSpeed, normalSpeed;
 
+    private bool triggered;
+
     private void Awake()
     {
+        triggered = false;
         alreadyAttacked = false;
         isCooldown = false;
         agent = GetComponent<NavMeshAgent>();
@@ -83,11 +86,27 @@ public class ChargeEnemyBehavior : MonoBehaviour
         */
     }
 
+
+
+
+    private void OnCollisionExit(Collision other)
+    {
+        triggered = false;
+        //this.GetComponent<BoxCollider>().enabled = true;
+    }
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag == "Player") {
-            Debug.Log("Hit da player");
-            //HealthManager.GetInstance().DoDamage(1);
+
+        
+        if (collision.collider.tag == "Player" && !triggered)
+        {
+
+            triggered = true;
+            Debug.Log("charge_enemy_collided");
+            //Debug.Log("Hit da player");
+            HealthManager.GetInstance().DoDamage(2);
         }
     }
 
@@ -111,7 +130,7 @@ public class ChargeEnemyBehavior : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 1f);
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 0f);
     }
 
     private void DestroyEnemy()
@@ -136,6 +155,7 @@ public class ChargeEnemyBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "Axe")
         {
             Debug.Log("Hit monster");

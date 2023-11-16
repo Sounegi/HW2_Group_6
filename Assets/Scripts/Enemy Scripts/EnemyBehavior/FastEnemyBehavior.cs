@@ -11,8 +11,11 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
     //animation
     //private Animator spearAnim;
 
+    private bool triggered;
+
     private void Awake()
     {
+        triggered = false;
         wait = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.Find("Player").transform;
@@ -47,12 +50,16 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
     }
 
 
+
     private void OnTriggerEnter(Collider other)
     {
+        //Debug.Log("fastenemy_colided");
         
-        if(other.tag == "Player")
+        if(other.tag == "Player" && !triggered)
         {
-            Debug.Log("Hit da player");
+            triggered = true;
+            Debug.Log("fast_enemy_collided");
+            //Debug.Log("Hit da player");
             HealthManager.GetInstance().DoDamage(1);
         }
 
@@ -61,5 +68,11 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
             Debug.Log("Hit monster");
             TakeDamage(1);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        triggered = false;
+        //this.GetComponent<BoxCollider>().enabled = true;
     }
 }

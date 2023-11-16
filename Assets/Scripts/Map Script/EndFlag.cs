@@ -18,7 +18,7 @@ public class EndFlag : MonoBehaviour
     private void Update()
     {
         int enemy_remain = EnemyManager.GetInstance().CheckEnemyNum();
-        print(enemy_remain);
+        //print(enemy_remain);
         if(enemy_remain <= 0)
         {
             enable_portal();

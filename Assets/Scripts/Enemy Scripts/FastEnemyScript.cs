@@ -49,6 +49,7 @@ public class FastEnemyScript : EnemyTemplate
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.CompareTag("Player")) {
+            Debug.Log("Hit da player ARUR");
             HealthManager.GetInstance().AddHealth(-1);
             Instantiate(playerBloodPrefab, collision.transform.Find("HeartPosition").position, Quaternion.identity);
             Die();

@@ -8086,7 +8086,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122270642}
-  m_LocalRotation: {x: 0.12218325, y: -0.000000017077465, z: 0.0000000021023316, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218327, y: 0.000000017077465, z: -0.0000000021023319, w: 0.9925076}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8460,6 +8460,7 @@ MonoBehaviour:
   - Scene_2
   - Scene_3
   - Main Menu
+  gameOver: 
 --- !u!4 &1633715072
 Transform:
   m_ObjectHideFlags: 0
@@ -9332,6 +9333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa41fac18961fe24984d27fa337a2201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodPrefab: {fileID: 0}
 --- !u!114 &2071743629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9580,7 +9582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3492855718324001376, guid: 99f726cf9d16fe4449547c55abb9c674, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 7.81
       objectReference: {fileID: 0}
     - target: {fileID: 3492855718324001376, guid: 99f726cf9d16fe4449547c55abb9c674, type: 3}
       propertyPath: m_LocalRotation.w

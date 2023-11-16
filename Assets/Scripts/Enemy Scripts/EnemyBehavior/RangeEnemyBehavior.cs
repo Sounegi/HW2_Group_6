@@ -7,13 +7,17 @@ public class RangeEnemyBehavior : SimpleEnemyBehavior
     //private Animator crossbowAnim;
 
     [SerializeField] private GameObject bulletPrefab;
+    private bool triggered;
     private void Awake()
     {
+        alreadyAttacked = false;
+        triggered = false;
         wait = false;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.Find("Player").transform;
         //base.Awake();
         health = 1;
+        timeBetweenAttacks = 3f;
     }
 
     protected override void AttackPlayer()
@@ -21,7 +25,7 @@ public class RangeEnemyBehavior : SimpleEnemyBehavior
         agent.SetDestination(transform.position);
 
         transform.LookAt(player);
-
+        
         if (!alreadyAttacked)
         {
             //Attacking code
@@ -39,11 +43,26 @@ public class RangeEnemyBehavior : SimpleEnemyBehavior
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("fastenemy_colided");
+
+        if (other.tag == "Player" && !triggered)
+        {
+            triggered = true;
+            Debug.Log("Hit da player");
+            HealthManager.GetInstance().DoDamage(1);
+        }
+
         if (other.tag == "Axe")
         {
-            Debug.Log("Range kena Hit Player");
+            Debug.Log("Hit monster");
             TakeDamage(1);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        triggered = false;
+        //this.GetComponent<BoxCollider>().enabled = true;
     }
 
 }
