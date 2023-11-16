@@ -14,9 +14,10 @@ public class Timer : MonoBehaviour
     
     void Start()
     {
-        timerActive = false;
+        timerActive = true;
         Reset();
         timerText = GetComponent<TextMeshProUGUI>();
+        EnemyManager.GetInstance().OnEnd += StopTimer;
     }
 
     void Update()
@@ -43,5 +44,9 @@ public class Timer : MonoBehaviour
         prevTime = Time.time;
         seconds = 0;
         minutes = 0;
+    }
+
+    public void StopTimer() {
+        timerActive = false;
     }
 }

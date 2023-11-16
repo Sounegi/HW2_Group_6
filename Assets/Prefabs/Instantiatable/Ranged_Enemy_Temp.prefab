@@ -141,6 +141,9 @@ MonoBehaviour:
   agent: {fileID: 0}
   player: {fileID: 0}
   detect: {fileID: 0}
+  hit: {fileID: 0}
+  enemyBloodPrefab: {fileID: 7187087914551853158, guid: a73e6424003edcf4cafc5134ea329e73, type: 3}
+  playerBloodPrefab: {fileID: 7187087914551853158, guid: a73e6424003edcf4cafc5134ea329e73, type: 3}
   bulletPrefab: {fileID: 8988123277787436685, guid: 6b95ae65497bc9f43a0d73c3690c2fe3, type: 3}
 --- !u!114 &3692331915007927547
 MonoBehaviour:

@@ -50,6 +50,7 @@ public class FastEnemyScript : EnemyTemplate
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.CompareTag("Player")) {
             HealthManager.GetInstance().AddHealth(-1);
+            Instantiate(playerBloodPrefab, collision.transform.Find("HeartPosition").position, Quaternion.identity);
             Die();
         }
     }

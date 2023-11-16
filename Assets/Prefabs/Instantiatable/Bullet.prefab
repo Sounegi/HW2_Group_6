@@ -127,3 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bc13092549684428fa765753b9c502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBloodPrefab: {fileID: 7187087914551853158, guid: a73e6424003edcf4cafc5134ea329e73, type: 3}
