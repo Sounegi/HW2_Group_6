@@ -27,6 +27,8 @@ public class ChargeEnemyBehavior : MonoBehaviour
         alreadyAttacked = false;
         isCooldown = false;
         agent = GetComponent<NavMeshAgent>();
+        player = GameObject.Find("Player").transform;
+        health = 1;
     }
 
     void Update()
@@ -109,12 +111,17 @@ public class ChargeEnemyBehavior : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 5f);
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 1f);
     }
 
     private void DestroyEnemy()
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        EnemyManager.GetInstance().DecreaseEnemy();
     }
 
     private void OnDrawGizmosSelected()
@@ -124,6 +131,15 @@ public class ChargeEnemyBehavior : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Axe")
+        {
+            Debug.Log("Hit monster");
+            TakeDamage(1);
         }
     }
 }

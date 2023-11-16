@@ -5,15 +5,24 @@ using UnityEngine;
 public class EndFlag : MonoBehaviour
 {
     public bool active;
-    public EnemyController tracker;
+    public event System.Action onChangeScene;
 
     void Start()
     {
         // this.enabled = false;   
-        // GetComponent<MeshRenderer>().enabled = false;
-        // GetComponent<CapsuleCollider>().enabled = false;
-        // tracker = GameObject.Find("EnemyController").GetComponent<EnemyController>();
-        // tracker.OnEnd += enable_portal;
+        //GetComponent<MeshRenderer>().enabled = false;
+        //GetComponent<CapsuleCollider>().enabled = false;
+        
+    }
+
+    private void Update()
+    {
+        int enemy_remain = EnemyManager.GetInstance().CheckEnemyNum();
+        print(enemy_remain);
+        if(enemy_remain <= 0)
+        {
+            enable_portal();
+        }
     }
 
     public void enable_portal()
@@ -25,8 +34,9 @@ public class EndFlag : MonoBehaviour
 
     void OnTriggerEnter(Collider obj)
     {
-        if(obj.tag == "Player")
+        if(obj.tag == "Indicator")// || obj.gameObject.layer == 3)
         {
+            print("pindah map");
             MapManager.GetInstance().EndScene();
         }
     }

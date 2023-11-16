@@ -40,6 +40,7 @@ public class MapManager : MonoBehaviour
 
     private IEnumerator ChangeScene(string scene)
     {
+        print("pindah ke scene:" + scene);
         ImageFade.GetInstance().StartFade(Color.black, 2f);
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(scene);

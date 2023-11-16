@@ -32,6 +32,13 @@ public class EnemyManager : MonoBehaviour {
 
     public void DecreaseEnemy() {
         enemyCount--;
+        if (enemyCount <= 0)
+            enemyCount = 0;
+    }
+
+    public int CheckEnemyNum()
+    {
+        return enemyCount;
     }
 
     void Update() {

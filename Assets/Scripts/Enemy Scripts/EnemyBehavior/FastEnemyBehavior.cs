@@ -11,6 +11,15 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
     //animation
     //private Animator spearAnim;
 
+    private void Awake()
+    {
+        wait = false;
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        player = GameObject.Find("Player").transform;
+        //base.Awake();
+        health = 1;
+    }
+
     protected override void AttackPlayer()
     {
         agent.SetDestination(transform.position);
@@ -40,10 +49,17 @@ public class FastEnemyBehavior : SimpleEnemyBehavior
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if(other.tag == "Player")
         {
             Debug.Log("Hit da player");
             HealthManager.GetInstance().DoDamage(1);
+        }
+
+        if (other.tag == "Axe")
+        {
+            Debug.Log("Hit monster");
+            TakeDamage(1);
         }
     }
 }

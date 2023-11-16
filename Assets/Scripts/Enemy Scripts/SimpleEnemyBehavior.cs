@@ -37,7 +37,8 @@ public class SimpleEnemyBehavior : MonoBehaviour
     private void Awake()
     {
         wait = false;
-        agent = GetComponent<NavMeshAgent>();   
+        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -118,12 +119,17 @@ public class SimpleEnemyBehavior : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 5f);
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 1f);
     }
 
     private void DestroyEnemy()
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        EnemyManager.GetInstance().DecreaseEnemy();
     }
 
     private void OnDrawGizmosSelected()

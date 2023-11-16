@@ -7,7 +7,14 @@ public class RangeEnemyBehavior : SimpleEnemyBehavior
     //private Animator crossbowAnim;
 
     [SerializeField] private GameObject bulletPrefab;
-
+    private void Awake()
+    {
+        wait = false;
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        player = GameObject.Find("Player").transform;
+        //base.Awake();
+        health = 1;
+    }
 
     protected override void AttackPlayer()
     {
@@ -28,6 +35,15 @@ public class RangeEnemyBehavior : SimpleEnemyBehavior
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Axe")
+        {
+            Debug.Log("Range kena Hit Player");
+            TakeDamage(1);
+        }
     }
 
 }
