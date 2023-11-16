@@ -13,6 +13,8 @@ public class SimpleEnemyBehavior : MonoBehaviour
     public Transform player;
     public LayerMask isGrounded, isPlayer;
 
+    public bool showGizmo = true;
+
     //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -22,15 +24,19 @@ public class SimpleEnemyBehavior : MonoBehaviour
 
     //Attacking
     public float timeBetweenAttacks;
-    bool alreadyAttacked;
+
+    protected bool alreadyAttacked;
+
+
 
     //State
     public float sightRange, attackRange;
-    public bool playerInSight, playerInAttackRange;
+    public bool playerInSight, playerInAttackRange, wait;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        wait = false;
         agent = GetComponent<NavMeshAgent>();   
     }
 
@@ -43,10 +49,16 @@ public class SimpleEnemyBehavior : MonoBehaviour
 
 
         //if (!playerInSight && !playerInAttackRange) Patroling();
-        if (playerInSight && !playerInAttackRange) ChasePLayer();
-        if (playerInSight && playerInAttackRange) AttackPlayer();
+        if (wait) Waiting();
+        if (playerInSight && !playerInAttackRange && !wait) ChasePLayer();
+        if (playerInSight && playerInAttackRange && !wait) AttackPlayer();
     }
 
+
+    private void Waiting()
+    {
+        agent.SetDestination(transform.position);
+    }
 
     private void Patroling()
     {
@@ -74,12 +86,14 @@ public class SimpleEnemyBehavior : MonoBehaviour
         }
     }
 
-    private void ChasePLayer()
+
+    protected virtual void ChasePLayer()
     {
         agent.SetDestination(player.position);
     }
 
-    private void AttackPlayer()
+
+    protected virtual void AttackPlayer()
     {
         agent.SetDestination(transform.position);
 
@@ -95,7 +109,7 @@ public class SimpleEnemyBehavior : MonoBehaviour
         }
     }
 
-    private void ResetAttack()
+    protected virtual void ResetAttack()
     {
         alreadyAttacked = false;
     }
@@ -114,10 +128,14 @@ public class SimpleEnemyBehavior : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+
+        if (showGizmo)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, sightRange);
+        }
     }
 }
 
