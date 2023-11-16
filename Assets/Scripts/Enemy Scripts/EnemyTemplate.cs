@@ -9,6 +9,9 @@ public class EnemyTemplate : MonoBehaviour {
     public GameObject player;
     public DetectAttack detect;
     public event System.Action onHit;
+    [SerializeField] AudioClip hit;
+    [SerializeField] GameObject enemyBloodPrefab;
+    [SerializeField] public GameObject playerBloodPrefab;
 
     public void Awake () {
         agent = GetComponent<NavMeshAgent>();
@@ -45,6 +48,9 @@ public class EnemyTemplate : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")) {
             onHit?.Invoke();
+            Instantiate(enemyBloodPrefab, other.ClosestPoint(transform.position), Quaternion.identity);
         }
     }
+
+
 }

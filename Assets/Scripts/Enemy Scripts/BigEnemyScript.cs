@@ -22,6 +22,7 @@ public class BigEnemyScript : EnemyTemplate
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Player")) {
             HealthManager.GetInstance().AddHealth(-2);
+            Instantiate(playerBloodPrefab, collision.transform.Find("HeartPosition").position, Quaternion.identity);
         }
     }
 }
