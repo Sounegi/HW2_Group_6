@@ -47,7 +47,7 @@ public class Spawner : MonoBehaviour
         randomSpawnPosition = new Vector3(randomSpawnPosition.x, hit.point.y, randomSpawnPosition.z);
         int randomNum = Random.Range(1,4);
         GameObject musuh;
-        randomNum = 3;
+        randomNum = 1;
         if (randomNum == 1)
             musuh = Instantiate(small, randomSpawnPosition, Quaternion.identity);
         else if(randomNum == 2)
