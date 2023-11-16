@@ -58,4 +58,9 @@ public class HealthManager : MonoBehaviour
             currentHealth = 0;
         }
     }
+
+    public void DoDamage(int damage)
+    {
+        currentHealth -= damage;
+    }
 }
