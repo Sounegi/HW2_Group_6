@@ -23,10 +23,11 @@ public class MenuManager : MonoBehaviour
     {
         instance = this;
 
-        if(CanvasMaintainer.GetInstance() != null)
+        if(HealthManager.GetInstance() != null)
         {
-            Destroy(CanvasMaintainer.GetInstance().gameObject);
+            Destroy(HealthManager.GetInstance().gameObject);
         }
+
         if(MapManager.GetInstance() != null)
         {
             Destroy(MapManager.GetInstance().gameObject);

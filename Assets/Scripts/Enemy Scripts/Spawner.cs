@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
             if (Physics.Raycast(randomSpawnPosition, -Vector3.up, out hit))
             {
                 float offsetDistance = hit.distance;
-                Debug.DrawLine(randomSpawnPosition, hit.point, Color.cyan);
+                // Debug.DrawLine(randomSpawnPosition, hit.point, Color.cyan);
                 //Debug.Log("Raycast hit at " + hit.point.ToString());
                 //Debug.Log("Generated Object at: " + randomSpawnPosition.ToString());
                 created = true;
@@ -82,12 +82,12 @@ public class Spawner : MonoBehaviour
             float z_pos = Random.Range(-boundsZ / 2, boundsZ / 2);
             randomSpawnPosition = new Vector3(x_pos, floor.transform.position.y + 10f, z_pos);
             randomSpawnPosition = randomSpawnPosition + Random.insideUnitSphere * range;
-            Debug.Log(randomSpawnPosition);
+            // Debug.Log(randomSpawnPosition);
             if (NavMesh.SamplePosition(randomSpawnPosition, out hit, 1.0f, NavMesh.AllAreas))
             {
-                Debug.Log("Success");
+                // Debug.Log("Success");
                 float offsetDistance = hit.distance;
-                Debug.Log("Generated Object at: " + randomSpawnPosition.ToString());
+                // Debug.Log("Generated Object at: " + randomSpawnPosition.ToString());
                 created = true;
             }
         }
