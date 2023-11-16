@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class HealingItem : MonoBehaviour
 {
-    private const float volume = 0.4f;
+    private AudioManager audioMan;
+
     public float rotationSpeed = 30f;
+
+    void Start()
+    {
+        audioMan = GetComponent<AudioManager>();
+    }
 
     void Update()
     {
@@ -17,7 +23,7 @@ public class HealingItem : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             HealthManager.GetInstance().AddHealth(1);
-            // AudioManager.GetInstance().PlaySoundEffect(1, volume);
+            PotionSFXManager.GetInstance().PlayClip();
             Destroy(gameObject);
         }
     }

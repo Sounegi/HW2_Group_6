@@ -11,8 +11,15 @@ public class DataManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        if(instance == null)
+		{	
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else if(instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public static DataManager GetInstance()
@@ -20,8 +27,13 @@ public class DataManager : MonoBehaviour
         return instance;
     }
 
-    void OnValueChanged(float value)
+    public void ChangeVolume(float value)
     {
         volumeMultiplier = value;
+    }
+
+    public float GetVolume()
+    {
+        return volumeMultiplier;
     }
 }

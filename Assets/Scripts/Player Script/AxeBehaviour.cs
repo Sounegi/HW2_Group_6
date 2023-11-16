@@ -32,7 +32,7 @@ public class AxeBehaviour : MonoBehaviour
         if(!attacking)
         {
             attacking = true;
-            audioPlayer.PlayClip(0, 1.0f);
+            audioPlayer.PlayClip(0, 0.5f);
             col.enabled = true;
         }
     }
